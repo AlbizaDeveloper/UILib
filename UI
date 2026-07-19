@@ -1,19 +1,19 @@
 --[[
-    ╔══════════════════════════════════════════╗
-    ║           ALBIZA UI LIBRARY              ║
-    ║       Black & Red Gradient Theme         ║
-    ║   Snow Particles · Animated Intro        ║
-    ╚══════════════════════════════════════════╝
+    â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+    â•‘           ALBIZA UI LIBRARY              â•‘
+    â•‘       Black & Red Gradient Theme         â•‘
+    â•‘   Snow Particles Â· Animated Intro        â•‘
+    â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     VERSION : 1.0.0
     AUTHOR  : Albiza
 
-    ── COMPONENTS ──────────────────────────────
-      Window  · Tab  · Section  · Label
-      Button  · Toggle  · Slider
-      Input   · Dropdown  · Keybind
-      ColorPicker  · Separator  · Notify
+    â”€â”€ COMPONENTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      Window  Â· Tab  Â· Section  Â· Label
+      Button  Â· Toggle  Â· Slider
+      Input   Â· Dropdown  Â· Keybind
+      ColorPicker  Â· Separator  Â· Notify
 
-    ── USAGE ───────────────────────────────────
+    â”€â”€ USAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       local Lib = loadstring(game:HttpGet("URL"))()
 
       local Win = Lib:CreateWindow({
@@ -31,7 +31,7 @@
       })
 ]]
 
--- ── Services ──────────────────────────────────────────────────────────────
+-- â”€â”€ Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 local Players          = game:GetService("Players")
 local TweenService     = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
@@ -60,7 +60,7 @@ if not targetGuiParent then
     targetGuiParent = LocalPlayer:WaitForChild("PlayerGui")
 end
 
--- ── Utility ───────────────────────────────────────────────────────────────
+-- â”€â”€ Utility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 local function Tween(obj, info, props)
     local t = TweenService:Create(obj, info, props); t:Play(); return t
 end
@@ -111,7 +111,7 @@ local function MakeDraggable(frame, handle)
     end)
 end
 
--- ── Theme ─────────────────────────────────────────────────────────────────
+-- â”€â”€ Theme â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 local T = {
     BG          = Color3.fromRGB(12,  12,  16),
     BGAlt       = Color3.fromRGB(18,  18,  24),
@@ -134,7 +134,7 @@ local T = {
     Snow        = Color3.fromRGB(220, 230, 255),
 }
 
--- ── Snow ──────────────────────────────────────────────────────────────────
+-- â”€â”€ Snow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 local function CreateSnow(parent, count)
     local flakes = {}
     for i = 1, (count or 50) do
@@ -171,7 +171,7 @@ local function CreateSnow(parent, count)
     return conn
 end
 
--- ── Intro ─────────────────────────────────────────────────────────────────
+-- â”€â”€ Intro â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 local function PlayIntro(text, cb)
     local sg = New("ScreenGui", {
         Name           = "AlbizaIntro",
@@ -253,9 +253,9 @@ local function PlayIntro(text, cb)
     if cb then cb() end
 end
 
--- ═════════════════════════════════════════════════════════════════════════
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 --  ALBIZA LIBRARY
--- ═════════════════════════════════════════════════════════════════════════
+-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 local Lib = {}
 Lib.__index = Lib
 
@@ -302,7 +302,7 @@ function Lib:CreateWindow(cfg)
     })
     AddGrad(topLine, T.AccentDark, T.AccentGlow, 90)
 
-    -- ── Title bar ────────────────────────────────────────────────────────
+    -- â”€â”€ Title bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     local tbar = New("Frame", {
         Parent = main, Size = UDim2.new(1,0,0,48),
         Position = UDim2.new(0,0,0,2),
@@ -354,8 +354,8 @@ function Lib:CreateWindow(cfg)
         b.MouseLeave:Connect(function() Tween(b, TweenInfo.new(0.14), { BackgroundColor3 = bg  }) end)
         return b
     end
-    local closeBtn = CtrlBtn("✕", -12, Color3.fromRGB(175,28,48), Color3.fromRGB(220,45,65))
-    local minBtn   = CtrlBtn("−", -42, Color3.fromRGB(48,48,62),  Color3.fromRGB(80,80,100))
+    local closeBtn = CtrlBtn("âœ•", -12, Color3.fromRGB(175,28,48), Color3.fromRGB(220,45,65))
+    local minBtn   = CtrlBtn("âˆ’", -42, Color3.fromRGB(48,48,62),  Color3.fromRGB(80,80,100))
 
     closeBtn.MouseButton1Click:Connect(function()
         Tween(main, TweenInfo.new(0.28, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {
@@ -380,7 +380,7 @@ function Lib:CreateWindow(cfg)
 
     if wc.Draggable then MakeDraggable(main, tbar) end
 
-    -- ── Sidebar ──────────────────────────────────────────────────────────
+    -- â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     local sidebar = New("Frame", {
         Parent = main, Size = UDim2.new(0,148,1,-50),
         Position = UDim2.new(0,0,0,50),
@@ -409,14 +409,14 @@ function Lib:CreateWindow(cfg)
         TextColor3 = T.TextMute, TextSize = 10, Font = Enum.Font.BuilderSansMedium, ZIndex = 6,
     })
 
-    -- ── Content area ─────────────────────────────────────────────────────
+    -- â”€â”€ Content area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     local content = New("Frame", {
         Parent = main, Size = UDim2.new(1,-148,1,-50),
         Position = UDim2.new(0,148,0,50),
         BackgroundTransparency = 1, ClipsDescendants = true, ZIndex = 4,
     })
 
-    -- ── Notification holder ───────────────────────────────────────────────
+    -- â”€â”€ Notification holder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     local notifHolder = New("Frame", {
         Parent = sg, Size = UDim2.new(0,285,1,0),
         Position = UDim2.new(1,-295,0,0),
@@ -430,13 +430,13 @@ function Lib:CreateWindow(cfg)
         Parent = notifHolder, PaddingBottom = UDim.new(0,14), PaddingRight = UDim.new(0,6),
     })
 
-    -- ════════════════════════════════════════════════════════════════════
+    -- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     local Win = {}
     local tabs      = {}
     local tabOrder  = 0
     local activeTab = nil
 
-    -- ─ Notify ────────────────────────────────────────────────────────────
+    -- â”€ Notify â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function Win:Notify(c)
         c = c or {}
         local nc = {
@@ -481,7 +481,7 @@ function Lib:CreateWindow(cfg)
         end)
     end
 
-    -- ─ AddTab ─────────────────────────────────────────────────────────────
+    -- â”€ AddTab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function Win:AddTab(c)
         c = c or {}
         tabOrder = tabOrder + 1
@@ -548,7 +548,7 @@ function Lib:CreateWindow(cfg)
         end)
         if #tabs == 1 then Select() end
 
-        -- ─ Tab API ────────────────────────────────────────────────────────
+        -- â”€ Tab API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         local Tab = {}
         local ord = 0
         local function O() ord = ord + 1; return ord end
@@ -596,7 +596,7 @@ function Lib:CreateWindow(cfg)
             })
         end
 
-        -- Button ───────────────────────────────────────────────────────────
+        -- Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddButton(c2)
             c2 = c2 or {}
             local bc = {
@@ -613,7 +613,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-100,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = bc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             if bc.Desc ~= "" then
@@ -655,7 +655,7 @@ function Lib:CreateWindow(cfg)
             return A
         end
 
-        -- Toggle ───────────────────────────────────────────────────────────
+        -- Toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddToggle(c2)
             c2 = c2 or {}
             local tc = {
@@ -674,7 +674,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-68,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = tc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             if tc.Desc ~= "" then
@@ -721,7 +721,7 @@ function Lib:CreateWindow(cfg)
             return A
         end
 
-        -- Slider ───────────────────────────────────────────────────────────
+        -- Slider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddSlider(c2)
             c2 = c2 or {}
             local sc = {
@@ -744,7 +744,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-82,0,20), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = sc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local valLbl = New("TextLabel", {
@@ -823,7 +823,7 @@ function Lib:CreateWindow(cfg)
             return A
         end
 
-        -- Input ────────────────────────────────────────────────────────────
+        -- Input â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddInput(c2)
             c2 = c2 or {}
             local ic = {
@@ -844,7 +844,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-20,0,20), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = ic.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local box = New("TextBox", {
@@ -873,7 +873,7 @@ function Lib:CreateWindow(cfg)
             return A
         end
 
-        -- Dropdown ─────────────────────────────────────────────────────────
+        -- Dropdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddDropdown(c2)
             c2 = c2 or {}
             local dc = {
@@ -894,7 +894,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-20,0,20), Position = UDim2.new(0,12,0,6),
                 BackgroundTransparency = 1, Text = dc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local dBtn = New("TextButton", {
@@ -914,7 +914,7 @@ function Lib:CreateWindow(cfg)
             local arw = New("TextLabel", {
                 Parent = dBtn, Size = UDim2.new(0,24,1,0),
                 Position = UDim2.new(1,-28,0,0),
-                BackgroundTransparency = 1, Text = "▼",
+                BackgroundTransparency = 1, Text = "â–¼",
                 TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.BuilderSansExtraBold, ZIndex = 7,
             })
             local list = New("Frame", {
@@ -948,7 +948,7 @@ function Lib:CreateWindow(cfg)
                         sel = opt; dLbl.Text = opt; isOpen = false
                         Tween(list,  TweenInfo.new(0.18, Enum.EasingStyle.Quart), { Size = UDim2.new(1,-24,0,0) })
                         Tween(elSt,  TweenInfo.new(0.16), { Color = T.Border })
-                        arw.Text = "▼"; task.spawn(dc.Callback, opt)
+                        arw.Text = "â–¼"; task.spawn(dc.Callback, opt)
                     end)
                     table.insert(optBtns, ob)
                 end
@@ -961,11 +961,11 @@ function Lib:CreateWindow(cfg)
                 if isOpen then
                     Tween(list,  TweenInfo.new(0.22, Enum.EasingStyle.Quart), { Size = UDim2.new(1,-24,0, math.min(totalH,150)) })
                     Tween(elSt,  TweenInfo.new(0.16), { Color = T.BorderAcc })
-                    arw.Text = "▲"
+                    arw.Text = "â–²"
                 else
                     Tween(list,  TweenInfo.new(0.18, Enum.EasingStyle.Quart), { Size = UDim2.new(1,-24,0,0) })
                     Tween(elSt,  TweenInfo.new(0.16), { Color = T.Border })
-                    arw.Text = "▼"
+                    arw.Text = "â–¼"
                 end
             end)
 
@@ -976,7 +976,7 @@ function Lib:CreateWindow(cfg)
             return A
         end
 
-        -- Keybind ──────────────────────────────────────────────────────────
+        -- Keybind â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddKeybind(c2)
             c2 = c2 or {}
             local kc = {
@@ -996,7 +996,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-110,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = kc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             if kc.Desc ~= "" then
@@ -1035,7 +1035,7 @@ function Lib:CreateWindow(cfg)
             return A
         end
 
-        -- ColorPicker ──────────────────────────────────────────────────────
+        -- ColorPicker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function Tab:AddColorPicker(c2)
             c2 = c2 or {}
             local cc = {
@@ -1055,7 +1055,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-70,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = cc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local prev = New("TextButton", {
