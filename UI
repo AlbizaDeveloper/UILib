@@ -113,25 +113,25 @@ end
 
 -- ── Theme ─────────────────────────────────────────────────────────────────
 local T = {
-    BG          = Color3.fromRGB(8,   8,  10),
-    BGAlt       = Color3.fromRGB(13,  13, 17),
-    Surface     = Color3.fromRGB(18,  18, 24),
-    SurfaceAlt  = Color3.fromRGB(24,  24, 32),
-    Accent      = Color3.fromRGB(220, 30, 60),
-    AccentDark  = Color3.fromRGB(150, 15, 40),
-    AccentGlow  = Color3.fromRGB(255, 65, 95),
-    Text        = Color3.fromRGB(255, 255, 255),
-    TextSub     = Color3.fromRGB(185, 185, 190),
-    TextMute    = Color3.fromRGB(95,  95, 108),
-    Border      = Color3.fromRGB(40,  40,  55),
-    BorderAcc   = Color3.fromRGB(180, 30,  55),
-    TOn         = Color3.fromRGB(220, 30,  60),
+    BG          = Color3.fromRGB(12,  12,  16),
+    BGAlt       = Color3.fromRGB(18,  18,  24),
+    Surface     = Color3.fromRGB(24,  24,  32),
+    SurfaceAlt  = Color3.fromRGB(30,  30,  40),
+    Accent      = Color3.fromRGB(255, 42,  77),
+    AccentDark  = Color3.fromRGB(180, 20,  50),
+    AccentGlow  = Color3.fromRGB(255, 80,  110),
+    Text        = Color3.fromRGB(245, 245, 250),
+    TextSub     = Color3.fromRGB(170, 170, 180),
+    TextMute    = Color3.fromRGB(100, 100, 115),
+    Border      = Color3.fromRGB(35,  35,  45),
+    BorderAcc   = Color3.fromRGB(200, 30,  60),
+    TOn         = Color3.fromRGB(255, 42,  77),
     TOff        = Color3.fromRGB(45,  45,  60),
-    SliderBG    = Color3.fromRGB(35,  35,  48),
-    InputBG     = Color3.fromRGB(20,  20,  28),
-    BtnBG       = Color3.fromRGB(28,  28,  38),
-    DropBG      = Color3.fromRGB(20,  20,  30),
-    Snow        = Color3.fromRGB(200, 215, 255),
+    SliderBG    = Color3.fromRGB(30,  30,  40),
+    InputBG     = Color3.fromRGB(15,  15,  22),
+    BtnBG       = Color3.fromRGB(26,  26,  36),
+    DropBG      = Color3.fromRGB(22,  22,  30),
+    Snow        = Color3.fromRGB(220, 230, 255),
 }
 
 -- ── Snow ──────────────────────────────────────────────────────────────────
@@ -187,96 +187,69 @@ local function PlayIntro(text, cb)
         BackgroundTransparency = 0,
         ZIndex               = 100,
     })
-    AddGrad(bg, Color3.fromRGB(5,5,8), Color3.fromRGB(22,4,10), 135)
-    CreateSnow(bg, 80)
+    AddGrad(bg, Color3.fromRGB(5,5,8), Color3.fromRGB(15,8,12), 135)
 
-    -- Glow circle
-    local glow = New("Frame", {
-        Parent = bg,
-        Size   = UDim2.new(0,260,0,260),
-        Position = UDim2.new(0.5,-130, 0.5,-130),
-        BackgroundColor3 = T.Accent,
-        BackgroundTransparency = 0.82,
-        BorderSizePixel = 0, ZIndex = 101,
+    -- Sleek center logo container
+    local logoContainer = New("Frame", {
+        Parent = bg, Size = UDim2.new(0, 300, 0, 100),
+        Position = UDim2.new(0.5, -150, 0.5, -30),
+        BackgroundTransparency = 1, ZIndex = 102,
     })
-    AddCorner(glow, 1, 0)
-
-    -- Ring
-    local ring = New("Frame", {
-        Parent = bg, Size = UDim2.new(0,150,0,150),
-        Position = UDim2.new(0.5,-75, 0.5,-115),
-        BackgroundTransparency = 1, BorderSizePixel = 0, ZIndex = 102,
-    })
-    AddCorner(ring, 1, 0)
-    local rStroke = AddStroke(ring, T.Accent, 3)
 
     local logoLbl = New("TextLabel", {
-        Parent = ring, Size = UDim2.new(1,0,1,0),
+        Parent = logoContainer, Size = UDim2.new(0, 60, 0, 60),
+        Position = UDim2.new(0.5, -30, 0.5, -50),
         BackgroundTransparency = 1, Text = "A",
-        TextColor3 = T.Accent, TextSize = 85, Font = Enum.Font.GothamBold,
+        TextColor3 = T.Accent, TextSize = 60, Font = Enum.Font.BuilderSansExtraBold,
         TextTransparency = 1, ZIndex = 103,
     })
+
     local titleLbl = New("TextLabel", {
-        Parent = bg, Size = UDim2.new(0,440,0,50),
-        Position = UDim2.new(0.5,-220, 0.5,55),
+        Parent = logoContainer, Size = UDim2.new(1, 0, 0, 30),
+        Position = UDim2.new(0, 0, 0.5, 20),
         BackgroundTransparency = 1, Text = text or "Albiza Hub",
-        TextColor3 = T.Text, TextSize = 28, Font = Enum.Font.GothamBold,
-        TextTransparency = 1, ZIndex = 102,
-    })
-    local subLbl = New("TextLabel", {
-        Parent = bg, Size = UDim2.new(0,440,0,24),
-        Position = UDim2.new(0.5,-220, 0.5,110),
-        BackgroundTransparency = 1, Text = "Loading, please wait...",
-        TextColor3 = T.Accent, TextSize = 13, Font = Enum.Font.Gotham,
+        TextColor3 = T.Text, TextSize = 24, Font = Enum.Font.BuilderSansExtraBold,
         TextTransparency = 1, ZIndex = 102,
     })
 
-    -- Loading bar
     local barBG = New("Frame", {
-        Parent = bg, Size = UDim2.new(0,300,0,4),
-        Position = UDim2.new(0.5,-150, 0.5,150),
-        BackgroundColor3 = Color3.fromRGB(28,28,40),
-        BackgroundTransparency = 0.3, BorderSizePixel = 0, ZIndex = 102,
+        Parent = logoContainer, Size = UDim2.new(0, 160, 0, 3),
+        Position = UDim2.new(0.5, -80, 1, 10),
+        BackgroundColor3 = Color3.fromRGB(30, 30, 40),
+        BackgroundTransparency = 1, BorderSizePixel = 0, ZIndex = 102,
     })
     AddCorner(barBG, 1, 0)
+
     local barFill = New("Frame", {
-        Parent = barBG, Size = UDim2.new(0,0,1,0),
+        Parent = barBG, Size = UDim2.new(0, 0, 1, 0),
         BackgroundColor3 = T.Accent, BorderSizePixel = 0, ZIndex = 103,
     })
     AddCorner(barFill, 1, 0)
     AddGrad(barFill, T.AccentDark, T.AccentGlow, 90)
 
-    -- Glow pulse
-    local glowAnim = Tween(glow,
-        TweenInfo.new(1.3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
-        { Size = UDim2.new(0,340,0,340), Position = UDim2.new(0.5,-170,0.5,-170), BackgroundTransparency = 0.88 })
+    -- Animate in
+    local eOut = TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
+    Tween(logoLbl, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { TextTransparency = 0, Position = UDim2.new(0.5, -30, 0.5, -40) })
+    task.wait(0.1)
+    Tween(titleLbl, eOut, { TextTransparency = 0, Position = UDim2.new(0, 0, 0.5, 10) })
+    Tween(barBG, eOut, { BackgroundTransparency = 0 })
+    task.wait(0.2)
 
-    -- Ring flicker
-    local angle = 0
-    local spinC
-    spinC = RunService.Heartbeat:Connect(function(dt)
-        angle = (angle + 95*dt) % 360
-        rStroke.Transparency = 0.15 + math.abs(math.sin(math.rad(angle))) * 0.55
-    end)
+    -- Fast load
+    Tween(barFill, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut), { Size = UDim2.new(1, 0, 1, 0) })
+    task.wait(0.6)
 
-    local eOut = TweenInfo.new(0.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-    task.wait(0.25)
-    Tween(logoLbl,  eOut, { TextTransparency = 0 }); task.wait(0.35)
-    Tween(titleLbl, eOut, { TextTransparency = 0 }); task.wait(0.2)
-    Tween(subLbl,   eOut, { TextTransparency = 0 }); task.wait(0.2)
-    Tween(barFill, TweenInfo.new(1.9, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-        { Size = UDim2.new(1,0,1,0) })
-    task.wait(2.05)
-    subLbl.Text = "Ready!"; task.wait(0.4)
-
-    spinC:Disconnect(); glowAnim:Cancel()
-    local fOut = TweenInfo.new(0.65, Enum.EasingStyle.Quart, Enum.EasingDirection.In)
-    for _, d in ipairs(bg:GetDescendants()) do
-        if d:IsA("TextLabel") then Tween(d, TweenInfo.new(0.4), { TextTransparency = 1 }) end
-        if d:IsA("Frame")     then Tween(d, TweenInfo.new(0.5), { BackgroundTransparency = 1 }) end
+    -- Animate out
+    local fOut = TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.In)
+    Tween(logoContainer, fOut, { Position = UDim2.new(0.5, -150, 0.5, -50) })
+    for _, d in ipairs(logoContainer:GetDescendants()) do
+        if d:IsA("TextLabel") then Tween(d, fOut, { TextTransparency = 1 }) end
+        if d:IsA("Frame") then Tween(d, fOut, { BackgroundTransparency = 1 }) end
     end
-    Tween(bg, fOut, { BackgroundTransparency = 1 })
-    task.wait(0.72); sg:Destroy()
+    Tween(bg, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundTransparency = 1 })
+    
+    task.wait(0.45)
+    sg:Destroy()
     if cb then cb() end
 end
 
@@ -311,7 +284,7 @@ function Lib:CreateWindow(cfg)
         BackgroundColor3 = T.BG, BackgroundTransparency = 1,
         BorderSizePixel = 0, ClipsDescendants = true,
     })
-    AddCorner(main, 0, 10)
+    AddCorner(main, 0, 12)
     AddStroke(main, T.BorderAcc, 1)
     AddGrad(main, Color3.fromRGB(9,9,13), Color3.fromRGB(18,7,13), 155)
 
@@ -349,21 +322,21 @@ function Lib:CreateWindow(cfg)
         Parent = badge, Size = UDim2.new(1,0,1,0),
         BackgroundTransparency = 1, Text = "A",
         TextColor3 = Color3.fromRGB(255,255,255), TextSize = 18,
-        Font = Enum.Font.GothamBold, ZIndex = 7,
+        Font = Enum.Font.BuilderSansExtraBold, ZIndex = 7,
     })
 
     New("TextLabel", {
         Parent = tbar, Size = UDim2.new(0,240,0,22),
         Position = UDim2.new(0,52,0,7),
         BackgroundTransparency = 1, Text = wc.Title,
-        TextColor3 = T.Text, TextSize = 17, Font = Enum.Font.GothamBold,
+        TextColor3 = T.Text, TextSize = 17, Font = Enum.Font.BuilderSansExtraBold,
         TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
     })
     New("TextLabel", {
         Parent = tbar, Size = UDim2.new(0,160,0,16),
         Position = UDim2.new(0,52,0,28),
         BackgroundTransparency = 1, Text = wc.SubTitle,
-        TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.Gotham,
+        TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.BuilderSansMedium,
         TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
     })
 
@@ -374,7 +347,7 @@ function Lib:CreateWindow(cfg)
             Position = UDim2.new(1, xOff, 0.5,-11),
             BackgroundColor3 = bg, Text = icon,
             TextColor3 = Color3.fromRGB(255,255,255), TextSize = 12,
-            Font = Enum.Font.GothamBold, BorderSizePixel = 0, ZIndex = 6,
+            Font = Enum.Font.BuilderSansExtraBold, BorderSizePixel = 0, ZIndex = 6,
         })
         AddCorner(b, 1, 0)
         b.MouseEnter:Connect(function() Tween(b, TweenInfo.new(0.14), { BackgroundColor3 = hov }) end)
@@ -433,7 +406,7 @@ function Lib:CreateWindow(cfg)
         Parent = sidebar, Size = UDim2.new(1,0,0,18),
         Position = UDim2.new(0,0,1,-24),
         BackgroundTransparency = 1, Text = "Albiza UI  v1.0",
-        TextColor3 = T.TextMute, TextSize = 10, Font = Enum.Font.Gotham, ZIndex = 6,
+        TextColor3 = T.TextMute, TextSize = 10, Font = Enum.Font.BuilderSansMedium, ZIndex = 6,
     })
 
     -- ── Content area ─────────────────────────────────────────────────────
@@ -491,12 +464,12 @@ function Lib:CreateWindow(cfg)
         New("TextLabel", {
             Parent = notif, Size = UDim2.new(1,-18,0,22), Position = UDim2.new(0,14,0,10),
             BackgroundTransparency = 1, Text = nc.Title, TextColor3 = T.Text,
-            TextSize = 14, Font = Enum.Font.GothamBold, TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 202,
+            TextSize = 14, Font = Enum.Font.BuilderSansExtraBold, TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 202,
         })
         New("TextLabel", {
             Parent = notif, Size = UDim2.new(1,-18,0,32), Position = UDim2.new(0,14,0,33),
             BackgroundTransparency = 1, Text = nc.Content, TextColor3 = T.TextSub,
-            TextSize = 12, Font = Enum.Font.Gotham, TextXAlignment = Enum.TextXAlignment.Left,
+            TextSize = 12, Font = Enum.Font.BuilderSansMedium, TextXAlignment = Enum.TextXAlignment.Left,
             TextWrapped = true, ZIndex = 202,
         })
         Tween(notif, TweenInfo.new(0.38, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
@@ -532,7 +505,7 @@ function Lib:CreateWindow(cfg)
             Parent = tabBtn, Size = UDim2.new(1,-12,1,0),
             Position = UDim2.new(0,12,0,0),
             BackgroundTransparency = 1, Text = title,
-            TextColor3 = T.TextMute, TextSize = 13, Font = Enum.Font.Gotham,
+            TextColor3 = T.TextMute, TextSize = 13, Font = Enum.Font.BuilderSansMedium,
             TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 7,
         })
 
@@ -590,7 +563,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = f, Size = UDim2.new(1,-8,0,20), Position = UDim2.new(0,4,0,4),
                 BackgroundTransparency = 1, Text = (c2.Title or "Section"):upper(),
-                TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.GothamBold,
+                TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.BuilderSansExtraBold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             New("Frame", {
@@ -609,7 +582,7 @@ function Lib:CreateWindow(cfg)
             local lbl = New("TextLabel", {
                 Parent = f, Size = UDim2.new(1,0,1,0),
                 BackgroundTransparency = 1, Text = c2.Text or "Label",
-                TextColor3 = T.TextSub, TextSize = 13, Font = Enum.Font.Gotham,
+                TextColor3 = T.TextSub, TextSize = 13, Font = Enum.Font.BuilderSansMedium,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local A = {}; function A:Set(t) lbl.Text = t end; return A
@@ -640,14 +613,14 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-100,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = bc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             if bc.Desc ~= "" then
                 New("TextLabel", {
                     Parent = elem, Size = UDim2.new(1,-100,0,16), Position = UDim2.new(0,12,0,30),
                     BackgroundTransparency = 1, Text = bc.Desc, TextColor3 = T.TextMute,
-                    TextSize = 11, Font = Enum.Font.Gotham,
+                    TextSize = 11, Font = Enum.Font.BuilderSansMedium,
                     TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
                 })
             end
@@ -655,7 +628,7 @@ function Lib:CreateWindow(cfg)
                 Parent = elem, Size = UDim2.new(0,82,0,30), Position = UDim2.new(1,-92,0.5,-15),
                 BackgroundColor3 = T.Accent, Text = "Execute",
                 TextColor3 = Color3.fromRGB(255,255,255), TextSize = 12,
-                Font = Enum.Font.GothamBold, BorderSizePixel = 0, ZIndex = 6,
+                Font = Enum.Font.BuilderSansExtraBold, BorderSizePixel = 0, ZIndex = 6,
             })
             AddCorner(btn, 0, 6); AddGrad(btn, T.AccentDark, T.AccentGlow, 135)
             btn.MouseEnter:Connect(function()
@@ -701,14 +674,14 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-68,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = tc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             if tc.Desc ~= "" then
                 New("TextLabel", {
                     Parent = elem, Size = UDim2.new(1,-68,0,16), Position = UDim2.new(0,12,0,30),
                     BackgroundTransparency = 1, Text = tc.Desc, TextColor3 = T.TextMute,
-                    TextSize = 11, Font = Enum.Font.Gotham,
+                    TextSize = 11, Font = Enum.Font.BuilderSansMedium,
                     TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
                 })
             end
@@ -771,20 +744,20 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-82,0,20), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = sc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local valLbl = New("TextLabel", {
                 Parent = elem, Size = UDim2.new(0,70,0,20), Position = UDim2.new(1,-78,0,8),
                 BackgroundTransparency = 1, Text = tostring(val)..sc.Suffix,
-                TextColor3 = T.Accent, TextSize = 14, Font = Enum.Font.GothamBold,
+                TextColor3 = T.Accent, TextSize = 14, Font = Enum.Font.BuilderSansExtraBold,
                 TextXAlignment = Enum.TextXAlignment.Right, ZIndex = 6,
             })
             if sc.Desc ~= "" then
                 New("TextLabel", {
                     Parent = elem, Size = UDim2.new(1,-22,0,14), Position = UDim2.new(0,12,0,28),
                     BackgroundTransparency = 1, Text = sc.Desc, TextColor3 = T.TextMute,
-                    TextSize = 11, Font = Enum.Font.Gotham,
+                    TextSize = 11, Font = Enum.Font.BuilderSansMedium,
                     TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
                 })
             end
@@ -871,7 +844,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-20,0,20), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = ic.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local box = New("TextBox", {
@@ -880,7 +853,7 @@ function Lib:CreateWindow(cfg)
                 BackgroundColor3 = T.InputBG, BorderSizePixel = 0,
                 Text = ic.Default, PlaceholderText = ic.Placeholder,
                 PlaceholderColor3 = T.TextMute, TextColor3 = T.Text,
-                TextSize = 13, Font = Enum.Font.Gotham,
+                TextSize = 13, Font = Enum.Font.BuilderSansMedium,
                 ClearTextOnFocus = ic.ClearOnFocus, ZIndex = 6,
             })
             AddCorner(box, 0, 6); AddStroke(box, T.Border)
@@ -921,7 +894,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-20,0,20), Position = UDim2.new(0,12,0,6),
                 BackgroundTransparency = 1, Text = dc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local dBtn = New("TextButton", {
@@ -935,14 +908,14 @@ function Lib:CreateWindow(cfg)
                 Parent = dBtn, Size = UDim2.new(1,-30,1,0),
                 Position = UDim2.new(0,10,0,0),
                 BackgroundTransparency = 1, Text = sel,
-                TextColor3 = T.Text, TextSize = 13, Font = Enum.Font.Gotham,
+                TextColor3 = T.Text, TextSize = 13, Font = Enum.Font.BuilderSansMedium,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 7,
             })
             local arw = New("TextLabel", {
                 Parent = dBtn, Size = UDim2.new(0,24,1,0),
                 Position = UDim2.new(1,-28,0,0),
                 BackgroundTransparency = 1, Text = "▼",
-                TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.GothamBold, ZIndex = 7,
+                TextColor3 = T.Accent, TextSize = 11, Font = Enum.Font.BuilderSansExtraBold, ZIndex = 7,
             })
             local list = New("Frame", {
                 Parent = elem, Size = UDim2.new(1,-24,0,0),
@@ -964,7 +937,7 @@ function Lib:CreateWindow(cfg)
                         Parent = list, Size = UDim2.new(1,0,0,30),
                         BackgroundTransparency = 1, BackgroundColor3 = T.DropBG,
                         Text = opt, TextColor3 = T.TextSub,
-                        TextSize = 13, Font = Enum.Font.Gotham,
+                        TextSize = 13, Font = Enum.Font.BuilderSansMedium,
                         ZIndex = 21, LayoutOrder = i,
                     })
                     New("UIPadding", { Parent = ob, PaddingLeft = UDim.new(0,10) })
@@ -1023,14 +996,14 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-110,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = kc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             if kc.Desc ~= "" then
                 New("TextLabel", {
                     Parent = elem, Size = UDim2.new(1,-110,0,16), Position = UDim2.new(0,12,0,30),
                     BackgroundTransparency = 1, Text = kc.Desc, TextColor3 = T.TextMute,
-                    TextSize = 11, Font = Enum.Font.Gotham,
+                    TextSize = 11, Font = Enum.Font.BuilderSansMedium,
                     TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
                 })
             end
@@ -1039,7 +1012,7 @@ function Lib:CreateWindow(cfg)
                 Position = UDim2.new(1,-100,0.5,-14),
                 BackgroundColor3 = T.BtnBG, Text = key.Name,
                 TextColor3 = T.Accent, TextSize = 12,
-                Font = Enum.Font.GothamBold, BorderSizePixel = 0, ZIndex = 6,
+                Font = Enum.Font.BuilderSansExtraBold, BorderSizePixel = 0, ZIndex = 6,
             })
             AddCorner(kBtn, 0, 6); AddStroke(kBtn, T.Border)
             kBtn.MouseButton1Click:Connect(function()
@@ -1082,7 +1055,7 @@ function Lib:CreateWindow(cfg)
             New("TextLabel", {
                 Parent = elem, Size = UDim2.new(1,-70,0,22), Position = UDim2.new(0,12,0,8),
                 BackgroundTransparency = 1, Text = cc.Title, TextColor3 = T.Text,
-                TextSize = 14, Font = Enum.Font.GothamSemibold,
+                TextSize = 14, Font = Enum.Font.BuilderSansMediumSemibold,
                 TextXAlignment = Enum.TextXAlignment.Left, ZIndex = 6,
             })
             local prev = New("TextButton", {
@@ -1109,7 +1082,7 @@ function Lib:CreateWindow(cfg)
                 New("TextLabel", {
                     Parent = picker, Size = UDim2.new(0,14,0,17), Position = UDim2.new(0,5,0,yp),
                     BackgroundTransparency = 1, Text = ch, TextColor3 = ac,
-                    TextSize = 11, Font = Enum.Font.GothamBold, ZIndex = 31,
+                    TextSize = 11, Font = Enum.Font.BuilderSansExtraBold, ZIndex = 31,
                 })
                 local tr = New("Frame", {
                     Parent = picker, Size = UDim2.new(1,-50,0,5),
@@ -1131,7 +1104,7 @@ function Lib:CreateWindow(cfg)
                 local vl = New("TextLabel", {
                     Parent = picker, Size = UDim2.new(0,20,0,17), Position = UDim2.new(1,-22,0,yp),
                     BackgroundTransparency = 1, Text = tostring(dv), TextColor3 = ac,
-                    TextSize = 10, Font = Enum.Font.GothamBold, ZIndex = 31,
+                    TextSize = 10, Font = Enum.Font.BuilderSansExtraBold, ZIndex = 31,
                 })
                 local d2 = false
                 local hb = New("TextButton", {
