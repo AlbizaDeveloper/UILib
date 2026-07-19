@@ -41,16 +41,17 @@ local CoreGui
 pcall(function() CoreGui = game:GetService("CoreGui") end)
 
 local targetGuiParent
-if gethui then
-    targetGuiParent = gethui()
+local success_gethui, res_gethui = pcall(function() return gethui() end)
+if success_gethui and res_gethui then
+    targetGuiParent = res_gethui
 else
     if CoreGui then
-        local success = pcall(function()
+        local success_core = pcall(function()
             local f = Instance.new("Folder")
             f.Parent = CoreGui
             f:Destroy()
         end)
-        if success then
+        if success_core then
             targetGuiParent = CoreGui
         end
     end
@@ -82,10 +83,7 @@ end
 local function AddGrad(f, c1, c2, rot)
     return New("UIGradient", {
         Parent   = f,
-        Color    = ColorSequence.new(
-            ColorSequenceKeypoint.new(0, c1),
-            ColorSequenceKeypoint.new(1, c2)
-        ),
+        Color    = ColorSequence.new(c1, c2),
         Rotation = rot or 135,
     })
 end
@@ -1175,11 +1173,18 @@ function Lib:CreateWindow(cfg)
     if wc.IntroEnabled then
         main.Visible = false
         task.spawn(function()
-            PlayIntro(wc.IntroText, function()
-                main.Visible = true
-                Tween(main, TweenInfo.new(0.42, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-                    { BackgroundTransparency = 0 })
+            local s, e = pcall(function()
+                PlayIntro(wc.IntroText, function()
+                    main.Visible = true
+                    Tween(main, TweenInfo.new(0.42, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                        { BackgroundTransparency = 0 })
+                end)
             end)
+            if not s then
+                warn("AlbizaLib Intro Error: " .. tostring(e))
+                main.Visible = true
+                main.BackgroundTransparency = 0
+            end
         end)
     else
         Tween(main, TweenInfo.new(0.38, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
