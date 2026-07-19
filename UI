@@ -36,8 +36,28 @@ local Players          = game:GetService("Players")
 local TweenService     = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService       = game:GetService("RunService")
-local CoreGui          = game:GetService("CoreGui")
-local LocalPlayer      = Players.LocalPlayer
+local LocalPlayer = Players.LocalPlayer
+local CoreGui
+pcall(function() CoreGui = game:GetService("CoreGui") end)
+
+local targetGuiParent
+if gethui then
+    targetGuiParent = gethui()
+else
+    if CoreGui then
+        local success = pcall(function()
+            local f = Instance.new("Folder")
+            f.Parent = CoreGui
+            f:Destroy()
+        end)
+        if success then
+            targetGuiParent = CoreGui
+        end
+    end
+end
+if not targetGuiParent then
+    targetGuiParent = LocalPlayer:WaitForChild("PlayerGui")
+end
 
 -- ── Utility ───────────────────────────────────────────────────────────────
 local function Tween(obj, info, props)
@@ -157,7 +177,7 @@ end
 local function PlayIntro(text, cb)
     local sg = New("ScreenGui", {
         Name           = "AlbizaIntro",
-        Parent         = CoreGui,
+        Parent         = targetGuiParent,
         ResetOnSpawn   = false,
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
         DisplayOrder   = 100,
@@ -283,7 +303,7 @@ function Lib:CreateWindow(cfg)
 
     -- Screen GUI
     local sg = New("ScreenGui", {
-        Name = "AlbizaUI", Parent = CoreGui,
+        Name = "AlbizaUI", Parent = targetGuiParent,
         ResetOnSpawn = false, ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
     })
 
