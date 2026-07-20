@@ -94,59 +94,33 @@ local function PlayIntro(text, cb)
         Name = "AlbizaIntro", Parent = targetGuiParent,
         ResetOnSpawn = false, ZIndexBehavior = Enum.ZIndexBehavior.Sibling, DisplayOrder = 100,
     })
+    
     local bg = New("Frame", {
         Parent = sg, Size = UDim2.new(1,0,1,0),
-        BackgroundColor3 = Color3.fromRGB(5,5,5), BackgroundTransparency = 0, ZIndex = 100,
+        BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 1, ZIndex = 100,
     })
-    Grad(bg, Color3.fromRGB(5,5,5), Color3.fromRGB(15,15,15), 135)
+    
+    local txt = New("TextLabel", {
+        Parent = bg, Size = UDim2.new(1,0,1,0), Position = UDim2.new(0.5,0,0.5,0),
+        AnchorPoint = Vector2.new(0.5,0.5), BackgroundTransparency = 1,
+        Text = text or "Albiza Hub", TextColor3 = T.Accent, TextSize = 250,
+        Font = Enum.Font.BuilderSansExtraBold, TextTransparency = 1, ZIndex = 101,
+    })
 
-    local container = New("Frame", {
-        Parent = bg, Size = UDim2.new(0,280,0,90),
-        Position = UDim2.new(0.5,-140, 0.5,-50),
-        BackgroundTransparency = 1, ZIndex = 102,
-    })
-    local logoA = New("TextLabel", {
-        Parent = container, Size = UDim2.new(0,52,0,52), Position = UDim2.new(0.5,-26,0,-10),
-        BackgroundTransparency = 1, Text = "A",
-        TextColor3 = T.Accent, TextSize = 52, Font = Enum.Font.BuilderSansExtraBold,
-        TextTransparency = 1, ZIndex = 103,
-    })
-    local titleL = New("TextLabel", {
-        Parent = container, Size = UDim2.new(1,0,0,28), Position = UDim2.new(0,0,0,52),
-        BackgroundTransparency = 1, Text = text or "Albiza Hub",
-        TextColor3 = T.Text, TextSize = 22, Font = Enum.Font.BuilderSansExtraBold,
-        TextTransparency = 1, ZIndex = 102,
-    })
-    local barBg = New("Frame", {
-        Parent = container, Size = UDim2.new(0,140,0,3), Position = UDim2.new(0.5,-70,1,8),
-        BackgroundColor3 = T.SliderBG, BackgroundTransparency = 1, BorderSizePixel = 0, ZIndex = 102,
-    })
-    Corner(barBg, 4)
-    local barFill = New("Frame", {
-        Parent = barBg, Size = UDim2.new(0,0,1,0),
-        BackgroundColor3 = T.Accent, BorderSizePixel = 0, ZIndex = 103,
-    })
-    Corner(barFill, 4)
-    Grad(barFill, T.AccentDark, T.AccentGlow, 90)
+    Tween(bg, TweenInfo.new(0.55, Enum.EasingStyle.Quint), { BackgroundTransparency = 0.4 })
+    task.wait(0.5)
 
-    local eBack  = TweenInfo.new(0.6, Enum.EasingStyle.Back,  Enum.EasingDirection.Out)
-    local eQuart = TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out)
-    Tween(logoA,  eBack,  { TextTransparency = 0 })
-    task.wait(0.15)
-    Tween(titleL, eQuart, { TextTransparency = 0 })
-    Tween(barBg,  eQuart, { BackgroundTransparency = 0.5 })
-    task.wait(0.1)
-    Tween(barFill, TweenInfo.new(0.55, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut), { Size = UDim2.new(1,0,1,0) })
-    task.wait(0.65)
+    Tween(txt, TweenInfo.new(0.75, Enum.EasingStyle.Quint), { TextSize = 45, TextTransparency = 0 })
+    task.wait(1.5)
 
-    local eIn = TweenInfo.new(0.35, Enum.EasingStyle.Quart, Enum.EasingDirection.In)
-    Tween(logoA,   eIn, { TextTransparency = 1 })
-    Tween(titleL,  eIn, { TextTransparency = 1 })
-    Tween(barBg,   eIn, { BackgroundTransparency = 1 })
-    Tween(barFill, eIn, { BackgroundTransparency = 1 })
-    Tween(bg, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundTransparency = 1 })
-    task.wait(0.42); sg:Destroy()
+    Tween(txt, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { TextSize = 250, TextTransparency = 1 })
+    Tween(bg, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { BackgroundTransparency = 1 })
+    
+    task.wait(0.6)
     if cb then cb() end
+
+    task.wait(0.9)
+    sg:Destroy()
 end
 
 local Lib = {}
