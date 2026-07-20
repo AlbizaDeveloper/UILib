@@ -69,24 +69,24 @@ local function Drag(frame, handle)
 end
 
 local T = {
-    BG         = Color3.fromRGB(12, 12, 18),
-    BGAlt      = Color3.fromRGB(18, 18, 26),
-    Surface    = Color3.fromRGB(26, 26, 36),
-    SurfaceAlt = Color3.fromRGB(34, 34, 46),
-    Accent     = Color3.fromRGB(114, 137, 218),
-    AccentDark = Color3.fromRGB(78, 93, 148),
-    AccentGlow = Color3.fromRGB(153, 170, 229),
-    Text       = Color3.fromRGB(245, 245, 255),
-    TextSub    = Color3.fromRGB(180, 180, 195),
-    TextMute   = Color3.fromRGB(115, 115, 130),
-    Border     = Color3.fromRGB(42, 42, 56),
-    BorderAcc  = Color3.fromRGB(114, 137, 218),
-    TOn        = Color3.fromRGB(114, 137, 218),
-    TOff       = Color3.fromRGB(46, 46, 62),
-    SliderBG   = Color3.fromRGB(36, 36, 48),
-    InputBG    = Color3.fromRGB(16, 16, 22),
-    BtnBG      = Color3.fromRGB(32, 32, 44),
-    DropBG     = Color3.fromRGB(22, 22, 30),
+    BG         = Color3.fromRGB(10, 10, 10),
+    BGAlt      = Color3.fromRGB(15, 15, 15),
+    Surface    = Color3.fromRGB(22, 22, 22),
+    SurfaceAlt = Color3.fromRGB(30, 30, 30),
+    Accent     = Color3.fromRGB(255, 255, 255),
+    AccentDark = Color3.fromRGB(180, 180, 180),
+    AccentGlow = Color3.fromRGB(255, 255, 255),
+    Text       = Color3.fromRGB(255, 255, 255),
+    TextSub    = Color3.fromRGB(170, 170, 170),
+    TextMute   = Color3.fromRGB(100, 100, 100),
+    Border     = Color3.fromRGB(45, 45, 45),
+    BorderAcc  = Color3.fromRGB(200, 200, 200),
+    TOn        = Color3.fromRGB(240, 240, 240),
+    TOff       = Color3.fromRGB(40, 40, 40),
+    SliderBG   = Color3.fromRGB(35, 35, 35),
+    InputBG    = Color3.fromRGB(15, 15, 15),
+    BtnBG      = Color3.fromRGB(25, 25, 25),
+    DropBG     = Color3.fromRGB(18, 18, 18),
 }
 
 local function PlayIntro(text, cb)
@@ -96,9 +96,9 @@ local function PlayIntro(text, cb)
     })
     local bg = New("Frame", {
         Parent = sg, Size = UDim2.new(1,0,1,0),
-        BackgroundColor3 = Color3.fromRGB(6,6,9), BackgroundTransparency = 0, ZIndex = 100,
+        BackgroundColor3 = Color3.fromRGB(5,5,5), BackgroundTransparency = 0, ZIndex = 100,
     })
-    Grad(bg, Color3.fromRGB(6,6,9), Color3.fromRGB(12,4,8), 135)
+    Grad(bg, Color3.fromRGB(5,5,5), Color3.fromRGB(15,15,15), 135)
 
     local container = New("Frame", {
         Parent = bg, Size = UDim2.new(0,280,0,90),
@@ -170,14 +170,14 @@ function Lib:CreateWindow(cfg)
         ResetOnSpawn = false, ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
     })
 
-    local main = New("Frame", {
+    local main = New("CanvasGroup", {
         Parent = sg, Size = wc.Size, Position = wc.Position,
-        BackgroundColor3 = T.BG, BackgroundTransparency = 1,
-        BorderSizePixel = 0, ClipsDescendants = false,
+        BackgroundColor3 = T.BG, GroupTransparency = 1,
+        BorderSizePixel = 0,
     })
     Corner(main, 20)
     Stroke(main, T.BorderAcc, 1)
-    Grad(main, T.BG, Color3.fromRGB(16,16,22), 160)
+    Grad(main, T.BG, Color3.fromRGB(25,25,25), 160)
 
     -- Inner clip so rounded corners apply to content
     local clip = New("Frame", {
@@ -503,7 +503,7 @@ function Lib:CreateWindow(cfg)
             local btn = New("TextButton", {
                 Parent = elem, Size = UDim2.new(0,88,0,30), Position = UDim2.new(1,-98,0.5,-15),
                 BackgroundColor3 = T.Accent, Text = "Execute",
-                TextColor3 = Color3.fromRGB(255,255,255), TextSize = 12,
+                TextColor3 = T.BG, TextSize = 12,
                 Font = Enum.Font.BuilderSansExtraBold, BorderSizePixel = 0, ZIndex = 6,
             })
             Corner(btn, 12)
@@ -590,7 +590,7 @@ function Lib:CreateWindow(cfg)
             local knob = New("Frame", {
                 Parent = tBG, Size = UDim2.new(0,20,0,20),
                 Position = on and UDim2.new(1,-23,0.5,-10) or UDim2.new(0,3,0.5,-10),
-                BackgroundColor3 = Color3.fromRGB(255,255,255), BorderSizePixel = 0, ZIndex = 7,
+                BackgroundColor3 = on and T.BG or T.Text, BorderSizePixel = 0, ZIndex = 7,
             })
             Corner(knob, 10)
             local hit = New("TextButton", {
@@ -601,12 +601,12 @@ function Lib:CreateWindow(cfg)
             local function UpdateToggle()
                 if on then
                     Tween(tBG,  ti, { BackgroundColor3 = T.TOn })
-                    Tween(knob, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Position = UDim2.new(1,-23,0.5,-10) })
+                    Tween(knob, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Position = UDim2.new(1,-23,0.5,-10), BackgroundColor3 = T.BG })
                     Tween(elem, ti, { BackgroundTransparency = 0.02 })
                     Tween(elSt, ti, { Color = T.BorderAcc })
                 else
                     Tween(tBG,  ti, { BackgroundColor3 = T.TOff })
-                    Tween(knob, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Position = UDim2.new(0,3,0.5,-10) })
+                    Tween(knob, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), { Position = UDim2.new(0,3,0.5,-10), BackgroundColor3 = T.Text })
                     Tween(elem, ti, { BackgroundTransparency = 0.1 })
                     Tween(elSt, ti, { Color = T.Border })
                 end
@@ -687,12 +687,12 @@ function Lib:CreateWindow(cfg)
             Grad(fill, T.AccentDark, T.AccentGlow, 90)
             local knob = New("Frame", {
                 Parent = track, Size = UDim2.new(0,20,0,20), Position = UDim2.new(0,-10,0.5,-10),
-                BackgroundColor3 = Color3.fromRGB(255,255,255), BorderSizePixel = 0, ZIndex = 8,
+                BackgroundColor3 = T.Accent, BorderSizePixel = 0, ZIndex = 8,
             })
             Corner(knob, 10)
             local dot = New("Frame", {
                 Parent = knob, Size = UDim2.new(0.5,0,0.5,0), Position = UDim2.new(0.25,0,0.25,0),
-                BackgroundColor3 = T.Accent, BorderSizePixel = 0, ZIndex = 9,
+                BackgroundColor3 = T.BG, BorderSizePixel = 0, ZIndex = 9,
             })
             Corner(dot, 10)
             local hit = New("TextButton", {
@@ -1061,16 +1061,16 @@ function Lib:CreateWindow(cfg)
         task.spawn(function()
             local s, e = pcall(PlayIntro, wc.IntroText, function()
                 main.Visible = true
-                Tween(main, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundTransparency = 0 })
+                Tween(main, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { GroupTransparency = 0 })
             end)
             if not s then
                 warn("AlbizaLib Intro Error: " .. tostring(e))
                 main.Visible = true
-                main.BackgroundTransparency = 0
+                main.GroupTransparency = 0
             end
         end)
     else
-        Tween(main, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { BackgroundTransparency = 0 })
+        Tween(main, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), { GroupTransparency = 0 })
     end
 
     return Win
