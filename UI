@@ -1,3 +1,17 @@
+--[[
+    		Compkiller Interface
+
+    Author: 4lpaca
+    License: MIT
+    Github: https://github.com/4lpaca-pin/CompKiller
+    Original: compkiller.net
+
+        Version: 2.6
+    - Improved Performance Mode
+    	Compkiller:OptimizeMode(< boolean >)
+  	- Added Auto Color Logo
+		Compkiller:CustomIconHighlight()
+--]]
 
 --- Export Types ---
 
@@ -9556,12 +9570,12 @@ function Compkiller.new(Config : Window)
 		ImageLabel.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
 		ImageLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
 		ImageLabel.ZIndex = 151
-		ImageLabel.Image = Config.Logo
+		ImageLabel.Image = (Config.Logo and Config.Logo ~= "") and Config.Logo or Compkiller:_GetIcon("home")
 		ImageLabel.ImageTransparency = 1
 		ImageLabel.ClipsDescendants = false;
 
 		local ToggleCloseUI = function(v)
-			ImageLabel.Image = Config.Logo;
+			ImageLabel.Image = (Config.Logo and Config.Logo ~= "") and Config.Logo or Compkiller:_GetIcon("home");
 
 			if v then
 				ImageLabel.ClipsDescendants = true;
