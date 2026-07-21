@@ -1,16 +1,12 @@
 --[[
-    		Compkiller Interface
+    		Albiza Interface
 
-    Author: 4lpaca
-    License: MIT
-    Github: https://github.com/4lpaca-pin/CompKiller
-    Original: compkiller.net
+    Author: Albiza
+    Github: https://github.com/AlbizaDeveloper/UILib/
 
         Version: 2.6
     - Improved Performance Mode
-    	Compkiller:OptimizeMode(< boolean >)
   	- Added Auto Color Logo
-		Compkiller:CustomIconHighlight()
 --]]
 
 --- Export Types ---
@@ -6749,7 +6745,7 @@ function Compkiller.new(Config : Window)
 			});
 
 			Compkiller:_Animation(WindowLabel , Style , {
-				Position = UDim2.new(0, 60,0, 17),
+				Position = hasLogo and UDim2.new(0, 60,0, 17) or UDim2.new(0, 20, 0, 17),
 				TextTransparency = 0
 			});
 
@@ -6768,7 +6764,7 @@ function Compkiller.new(Config : Window)
 			});
 
 			Compkiller:_Animation(WindowLabel , Style , {
-				Position = UDim2.new(0, 60 + 25,0, 17),
+				Position = hasLogo and UDim2.new(0, 60 + 25,0, 17) or UDim2.new(0, 20 + 25, 0, 17),
 				TextTransparency = 1
 			});
 
