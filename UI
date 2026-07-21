@@ -1,11 +1,16 @@
 --[[
-    		Albiza Interface
+    		Compkiller Interface
 
-    Author: Albiza
+    Author: 4lpaca
+    License: MIT
+    Github: https://github.com/4lpaca-pin/CompKiller
+    Original: compkiller.net
 
-        Version: 1.1
+        Version: 2.6
     - Improved Performance Mode
+    	Compkiller:OptimizeMode(< boolean >)
   	- Added Auto Color Logo
+		Compkiller:CustomIconHighlight()
 --]]
 
 --- Export Types ---
@@ -10027,6 +10032,74 @@ function Compkiller.new(Config : Window)
 			end
 		end);
 	end);
+
+	local ControlButtons = Instance.new("Frame")
+	ControlButtons.Name = Compkiller:_RandomString()
+	ControlButtons.Parent = MainFrame
+	ControlButtons.AnchorPoint = Vector2.new(1, 0)
+	ControlButtons.BackgroundTransparency = 1
+	ControlButtons.Position = UDim2.new(1, -15, 0, 15)
+	ControlButtons.Size = UDim2.new(0, 60, 0, 25)
+	ControlButtons.ZIndex = 50
+
+	local UIListLayout_Control = Instance.new("UIListLayout")
+	UIListLayout_Control.Parent = ControlButtons
+	UIListLayout_Control.FillDirection = Enum.FillDirection.Horizontal
+	UIListLayout_Control.HorizontalAlignment = Enum.HorizontalAlignment.Right
+	UIListLayout_Control.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout_Control.Padding = UDim.new(0, 8)
+
+	local MinimizeBtn = Instance.new("TextButton")
+	MinimizeBtn.Name = "Minimize"
+	MinimizeBtn.Parent = ControlButtons
+	MinimizeBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
+	MinimizeBtn.Size = UDim2.new(0, 25, 0, 25)
+	MinimizeBtn.Font = Enum.Font.GothamBold
+	MinimizeBtn.Text = "-"
+	MinimizeBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+	MinimizeBtn.TextSize = 18
+	MinimizeBtn.AutoButtonColor = false
+	MinimizeBtn.ZIndex = 51
+	local MinCorner = Instance.new("UICorner")
+	MinCorner.CornerRadius = UDim.new(0, 6)
+	MinCorner.Parent = MinimizeBtn
+
+	local CloseBtn = Instance.new("TextButton")
+	CloseBtn.Name = "Close"
+	CloseBtn.Parent = ControlButtons
+	CloseBtn.BackgroundColor3 = Color3.fromRGB(220, 50, 60)
+	CloseBtn.Size = UDim2.new(0, 25, 0, 25)
+	CloseBtn.Font = Enum.Font.GothamBold
+	CloseBtn.Text = "x"
+	CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	CloseBtn.TextSize = 14
+	CloseBtn.AutoButtonColor = false
+	CloseBtn.ZIndex = 51
+	local CloseCorner = Instance.new("UICorner")
+	CloseCorner.CornerRadius = UDim.new(0, 6)
+	CloseCorner.Parent = CloseBtn
+
+	MinimizeBtn.MouseButton1Click:Connect(function()
+		WindowArgs:_ToggleUI()
+	end)
+
+	CloseBtn.MouseButton1Click:Connect(function()
+		WindowArgs:Destroy()
+	end)
+
+	MinimizeBtn.MouseEnter:Connect(function()
+		Compkiller:_Animation(MinimizeBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(60, 60, 65)})
+	end)
+	MinimizeBtn.MouseLeave:Connect(function()
+		Compkiller:_Animation(MinimizeBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(45, 45, 50)})
+	end)
+
+	CloseBtn.MouseEnter:Connect(function()
+		Compkiller:_Animation(CloseBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(240, 70, 80)})
+	end)
+	CloseBtn.MouseLeave:Connect(function()
+		Compkiller:_Animation(CloseBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(220, 50, 60)})
+	end)
 
 	return WindowArgs;
 end;
