@@ -2,9 +2,8 @@
     		Albiza Interface
 
     Author: Albiza
-    Github: https://github.com/AlbizaDeveloper/UILib/
 
-        Version: 2.6
+        Version: 1.1
     - Improved Performance Mode
   	- Added Auto Color Logo
 --]]
@@ -352,7 +351,7 @@ local Mouse: Mouse = LocalPlayer:GetMouse();
 local CurrentCamera: Camera? = cloneref(workspace.CurrentCamera);
 
 local Compkiller = {
-	Version = '2.6',
+	Version = '1.0',
 	Logo = "rbxassetid://120245531583106",
 	Windows = {},
 	Scale = {
@@ -6505,6 +6504,7 @@ function Compkiller.new(Config : Window)
 	SelectionFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	SelectionFrame.BorderSizePixel = 0
 	SelectionFrame.Position = UDim2.new(1, 5, 0, 28)
+	SelectionFrame.Visible = false
 	SelectionFrame.Size = UDim2.new(0, 8, 0, 27)
 
 	table.insert(Compkiller.Elements.Highlight,{
@@ -9648,6 +9648,7 @@ function Compkiller.new(Config : Window)
 			Logo.Size = UDim2.new(1, 10, 1, 0)
 			Logo.SizeConstraint = Enum.SizeConstraint.RelativeYY
 			Logo.ZIndex = 149
+			Logo.Visible = false
 
 			UICorner_2.CornerRadius = UDim.new(0, 3)
 			UICorner_2.Parent = Logo
@@ -9904,6 +9905,14 @@ function Compkiller.new(Config : Window)
 		WindowArgs.Profile = config.UserProfile or WindowArgs.Profile;
 	end;
 
+	function WindowArgs:Destroy()
+		if CompKiller then
+			CompKiller:Destroy()
+		end
+		if WindowArgs.LOOP_THREAD then
+			task.cancel(WindowArgs.LOOP_THREAD)
+		end
+	end;
 	WindowArgs.LOOP_THREAD = task.spawn(function()
 		local TimeTic = tick();
 
