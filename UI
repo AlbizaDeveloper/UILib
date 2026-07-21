@@ -373,7 +373,7 @@ local Compkiller = {
 };
 
 Compkiller.Colors = {
-	Highlight    = Color3.fromRGB(255, 255, 255),  -- pure white accent
+	Highlight    = Color3.fromRGB(100, 100, 100),  -- dark grey accent so white text is readable
 	Toggle       = Color3.fromRGB(200, 200, 200),  -- active toggle
 	Risky        = Color3.fromRGB(180, 180, 180),  -- warning (muted gray)
 	BGDBColor    = Color3.fromRGB(10,  10,  10),   -- main window background
@@ -6152,7 +6152,7 @@ function Compkiller:SetTheme(name)
 		};
 	elseif name == "Default" or name == "Monochrome" then
 		Compkiller.Colors = {
-			Highlight    = Color3.fromRGB(255, 255, 255),
+			Highlight    = Color3.fromRGB(100, 100, 100),
 			Toggle       = Color3.fromRGB(200, 200, 200),
 			Risky        = Color3.fromRGB(180, 180, 180),
 			BGDBColor    = Color3.fromRGB(10,  10,  10),
@@ -6463,7 +6463,9 @@ function Compkiller.new(Config : Window)
 	CompLogo.Position = UDim2.new(0, 9, 0, 7)
 	CompLogo.Size = UDim2.new(0, 45, 0, 45)
 	CompLogo.Image = Config.Logo
-	CompLogo.Visible = false
+	
+	local hasLogo = (Config.Logo ~= nil and Config.Logo ~= "")
+	CompLogo.Visible = hasLogo
 	
 	if Compkiller.CustomHighlightMode then
 		CompLogo.ImageColor3 = Compkiller.Colors.Highlight;
@@ -6479,7 +6481,7 @@ function Compkiller.new(Config : Window)
 	WindowLabel.BackgroundTransparency = 1.000
 	WindowLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	WindowLabel.BorderSizePixel = 0
-	WindowLabel.Position = UDim2.new(0, 20, 0, 17)
+	WindowLabel.Position = hasLogo and UDim2.new(0, 60, 0, 17) or UDim2.new(0, 20, 0, 17)
 	WindowLabel.Size = UDim2.new(0, 200, 0, 25)
 	WindowLabel.Font = Enum.Font.GothamBold
 	WindowLabel.Text = Config.Name
