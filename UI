@@ -1,6 +1,16 @@
 --[[
-Data Interface
-Author: Albiya
+    		Compkiller Interface
+
+    Author: 4lpaca
+    License: MIT
+    Github: https://github.com/4lpaca-pin/CompKiller
+    Original: compkiller.net
+
+        Version: 2.6
+    - Improved Performance Mode
+    	Compkiller:OptimizeMode(< boolean >)
+  	- Added Auto Color Logo
+		Compkiller:CustomIconHighlight()
 --]]
 
 --- Export Types ---
@@ -9532,8 +9542,8 @@ function Compkiller.new(Config : Window)
 
 		CloseWindow.Name = Compkiller:_RandomString()
 		CloseWindow.Parent = CompKiller
-		CloseWindow.AnchorPoint = Vector2.new(1, 0)
-		CloseWindow.BackgroundColor3 = Compkiller.Colors.BGDBColor
+		CloseWindow.AnchorPoint = Vector2.new(0.5, 0)
+		CloseWindow.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
 
 		table.insert(Compkiller.Elements.BGDBColor,{
 			Element = CloseWindow,
@@ -9543,26 +9553,46 @@ function Compkiller.new(Config : Window)
 		CloseWindow.BackgroundTransparency = 1
 		CloseWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		CloseWindow.BorderSizePixel = 0
-		CloseWindow.Position = UDim2.new(1, -10, 0, 10)
-		CloseWindow.Size = UDim2.new(0, 0, 0, 23)
+		CloseWindow.Position = UDim2.new(0.5, 0, 0, 15)
+		CloseWindow.Size = UDim2.new(0, 0, 0, 32)
 		CloseWindow.ZIndex = 150
 		CloseWindow.ClipsDescendants = true;
 
-		UICorner.CornerRadius = UDim.new(0, 3)
+		UICorner.CornerRadius = UDim.new(0, 6)
 		UICorner.Parent = CloseWindow
+		
+		local CloseGrad = Instance.new("UIGradient")
+		CloseGrad.Color = ColorSequence.new{
+			ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 15, 20)),
+			ColorSequenceKeypoint.new(1, Color3.fromRGB(35, 35, 45))
+		}
+		CloseGrad.Rotation = 45
+		CloseGrad.Parent = CloseWindow
 
 		ImageLabel.Parent = CloseWindow
-		ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+		ImageLabel.AnchorPoint = Vector2.new(0, 0.5)
 		ImageLabel.BackgroundTransparency = 1.000
 		ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		ImageLabel.BorderSizePixel = 0
-		ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
-		ImageLabel.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-		ImageLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
+		ImageLabel.Position = UDim2.new(0, 10, 0.5, 0)
+		ImageLabel.Size = UDim2.new(0, 16, 0, 16)
 		ImageLabel.ZIndex = 151
 		ImageLabel.Image = (Config.Logo and Config.Logo ~= "") and Config.Logo or Compkiller:_GetIcon("home")
 		ImageLabel.ImageTransparency = 1
 		ImageLabel.ClipsDescendants = false;
+		
+		local OpenText = Instance.new("TextLabel")
+		OpenText.Parent = CloseWindow
+		OpenText.BackgroundTransparency = 1
+		OpenText.Position = UDim2.new(0, 34, 0, 0)
+		OpenText.Size = UDim2.new(1, -34, 1, 0)
+		OpenText.Font = Enum.Font.GothamBold
+		OpenText.Text = "Open UI"
+		OpenText.TextColor3 = Color3.fromRGB(240, 240, 240)
+		OpenText.TextSize = 14
+		OpenText.TextXAlignment = Enum.TextXAlignment.Left
+		OpenText.TextTransparency = 1
+		OpenText.ZIndex = 151
 
 		local ToggleCloseUI = function(v)
 			ImageLabel.Image = (Config.Logo and Config.Logo ~= "") and Config.Logo or Compkiller:_GetIcon("home");
@@ -9571,23 +9601,30 @@ function Compkiller.new(Config : Window)
 				ImageLabel.ClipsDescendants = true;
 
 				Compkiller:_Animation(CloseWindow,TweenInfo.new(0.2),{
-					Size = UDim2.new(0, 45, 0, 23),
-					BackgroundTransparency = 0.025
+					Size = UDim2.new(0, 120, 0, 32),
+					BackgroundTransparency = 0
 				})
 
 				Compkiller:_Animation(ImageLabel,TweenInfo.new(0.2),{
 					ImageTransparency = (ImageLabel:GetAttribute('Hover') and 0.1) or 0.35
 				})
+				Compkiller:_Animation(OpenText,TweenInfo.new(0.2),{
+					TextTransparency = 0
+				})
 			else
 				ImageLabel.ClipsDescendants = false;
 
 				Compkiller:_Animation(CloseWindow,TweenInfo.new(0.2),{
-					Size = UDim2.new(0, 0, 0, 23),
+					Size = UDim2.new(0, 0, 0, 32),
 					BackgroundTransparency = 1
 				})
 
 				Compkiller:_Animation(ImageLabel,TweenInfo.new(0.2),{
 					ImageTransparency = 1
+				})
+				Compkiller:_Animation(OpenText,TweenInfo.new(0.2),{
+					TextTransparency = 1
+				})
 				})
 			end;
 		end;
@@ -10040,6 +10077,14 @@ function Compkiller.new(Config : Window)
 	local TopBarCorner = Instance.new("UICorner")
 	TopBarCorner.CornerRadius = UDim.new(0, 6)
 	TopBarCorner.Parent = TopBar
+
+	local TopBarGrad = Instance.new("UIGradient")
+	TopBarGrad.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 15, 20)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(35, 35, 45))
+	}
+	TopBarGrad.Rotation = -135
+	TopBarGrad.Parent = TopBar
 
 	local ControlButtons = Instance.new("Frame")
 	ControlButtons.Name = Compkiller:_RandomString()
