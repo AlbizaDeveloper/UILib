@@ -373,18 +373,18 @@ local Compkiller = {
 };
 
 Compkiller.Colors = {
-	Highlight = Color3.fromRGB(17, 238, 253),
-	Toggle = Color3.fromRGB(14, 203, 213),
-	Risky = Color3.fromRGB(251, 255, 39),
-	BGDBColor = Color3.fromRGB(22, 24, 29),
-	BlockColor = Color3.fromRGB(28, 29, 34),
-	StrokeColor = Color3.fromRGB(37, 38, 43),
-	SwitchColor = Color3.fromRGB(255, 255, 255),
-	DropColor = Color3.fromRGB(33, 35, 39),
-	MouseEnter = Color3.fromRGB(55, 58, 65),
-	BlockBackground = Color3.fromRGB(39, 40, 47),
-	LineColor = Color3.fromRGB(65, 65, 65),
-	HighStrokeColor = Color3.fromRGB(55, 56, 63),
+	Highlight    = Color3.fromRGB(255, 255, 255),  -- pure white accent
+	Toggle       = Color3.fromRGB(200, 200, 200),  -- active toggle
+	Risky        = Color3.fromRGB(180, 180, 180),  -- warning (muted gray)
+	BGDBColor    = Color3.fromRGB(10,  10,  10),   -- main window background
+	BlockColor   = Color3.fromRGB(20,  20,  20),   -- panel/block background
+	BlockBackground = Color3.fromRGB(30, 30, 30),  -- inner block bg
+	DropColor    = Color3.fromRGB(38,  38,  38),   -- dropdown/element bg
+	MouseEnter   = Color3.fromRGB(60,  60,  60),   -- hover highlight
+	StrokeColor  = Color3.fromRGB(48,  48,  48),   -- border lines
+	HighStrokeColor = Color3.fromRGB(85, 85, 85),  -- prominent borders
+	LineColor    = Color3.fromRGB(55,  55,  55),   -- dividers
+	SwitchColor  = Color3.fromRGB(255, 255, 255),  -- title/text (white)
 };
 
 Compkiller.Elements = {
@@ -6150,20 +6150,20 @@ function Compkiller:SetTheme(name)
 			["Toggle"] = Color3.new(0, 0.613793, 0.220119),
 			HighStrokeColor = Color3.new(0, 0.241379, 0.186445),
 		};
-	elseif name == "Default" then
+	elseif name == "Default" or name == "Monochrome" then
 		Compkiller.Colors = {
-			Highlight = Color3.fromRGB(17, 238, 253),
-			Toggle = Color3.fromRGB(14, 203, 213),
-			Risky = Color3.fromRGB(251, 255, 39),
-			BGDBColor = Color3.fromRGB(22, 24, 29),
-			BlockColor = Color3.fromRGB(28, 29, 34),
-			StrokeColor = Color3.fromRGB(37, 38, 43),
-			SwitchColor = Color3.fromRGB(255, 255, 255),
-			DropColor = Color3.fromRGB(33, 35, 39),
-			MouseEnter = Color3.fromRGB(55, 58, 65),
-			BlockBackground = Color3.fromRGB(39, 40, 47),
-			LineColor = Color3.fromRGB(65, 65, 65),
-			HighStrokeColor = Color3.fromRGB(55, 56, 63),
+			Highlight    = Color3.fromRGB(255, 255, 255),
+			Toggle       = Color3.fromRGB(200, 200, 200),
+			Risky        = Color3.fromRGB(180, 180, 180),
+			BGDBColor    = Color3.fromRGB(10,  10,  10),
+			BlockColor   = Color3.fromRGB(20,  20,  20),
+			BlockBackground = Color3.fromRGB(30, 30, 30),
+			DropColor    = Color3.fromRGB(38,  38,  38),
+			MouseEnter   = Color3.fromRGB(60,  60,  60),
+			StrokeColor  = Color3.fromRGB(48,  48,  48),
+			HighStrokeColor = Color3.fromRGB(85, 85, 85),
+			LineColor    = Color3.fromRGB(55,  55,  55),
+			SwitchColor  = Color3.fromRGB(255, 255, 255),
 		};
 	elseif name == "Dark Blue" then
 		Compkiller.Colors = {
@@ -6408,6 +6408,16 @@ function Compkiller.new(Config : Window)
 
 	UICorner.Parent = MainFrame
 
+	-- black → dark-gray diagonal gradient on main background
+	local MainGrad = Instance.new("UIGradient")
+	MainGrad.Color = ColorSequence.new{
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(8, 8, 10)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 30, 35))
+	}
+	MainGrad.Rotation = 135
+	MainGrad.Parent = MainFrame
+
+
 	local TabFrameBaseTrans = 0.25;
 
 	TabFrame.Active = true
@@ -6453,6 +6463,7 @@ function Compkiller.new(Config : Window)
 	CompLogo.Position = UDim2.new(0, 9, 0, 7)
 	CompLogo.Size = UDim2.new(0, 45, 0, 45)
 	CompLogo.Image = Config.Logo
+	CompLogo.Visible = false
 	
 	if Compkiller.CustomHighlightMode then
 		CompLogo.ImageColor3 = Compkiller.Colors.Highlight;
@@ -6468,7 +6479,7 @@ function Compkiller.new(Config : Window)
 	WindowLabel.BackgroundTransparency = 1.000
 	WindowLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	WindowLabel.BorderSizePixel = 0
-	WindowLabel.Position = UDim2.new(0, 60, 0, 17)
+	WindowLabel.Position = UDim2.new(0, 20, 0, 17)
 	WindowLabel.Size = UDim2.new(0, 200, 0, 25)
 	WindowLabel.Font = Enum.Font.GothamBold
 	WindowLabel.Text = Config.Name
